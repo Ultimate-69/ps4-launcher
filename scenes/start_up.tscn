@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cqb5o88gg7xrx"]
+[gd_scene load_steps=18 format=3 uid="uid://cqb5o88gg7xrx"]
 
 [ext_resource type="Texture2D" uid="uid://pr1bu6e7p3db" path="res://assets/images/playstation.png" id="1_fxnlx"]
 [ext_resource type="Script" uid="uid://buvn6q03dt0r6" path="res://scripts/start_up.gd" id="1_wk4wb"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bvrqkor4ev85i" path="res://assets/images/ic--baseline-plus.png" id="10_l5l0t"]
 [ext_resource type="Script" uid="uid://bgipjubahj1jg" path="res://scripts/game_button.gd" id="10_odctg"]
 [ext_resource type="Texture2D" uid="uid://7wxbi8ut057t" path="res://assets/images/fluent-mdl2--leave.png" id="12_54e46"]
+[ext_resource type="Texture2D" uid="uid://derfvggrf1tv5" path="res://assets/images/pajamas--remove.png" id="12_67aqp"]
 [ext_resource type="Texture2D" uid="uid://c15l3omtm4vty" path="res://assets/images/landscape-placeholder.svg" id="15_hhw6i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5l0t"]
@@ -123,6 +124,35 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Add New Game"
+
+[node name="RemoveGame" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+theme_override_font_sizes/font_size = 32
+theme_override_icons/icon = ExtResource("12_67aqp")
+script = ExtResource("10_odctg")
+
+[node name="Panel" type="Panel" parent="Menu/GameContainer/RemoveGame"]
+layout_mode = 0
+offset_top = 170.0
+offset_right = 158.0
+offset_bottom = 195.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l5l0t")
+
+[node name="Label" type="Label" parent="Menu/GameContainer/RemoveGame/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -11.5
+offset_right = 56.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Remove Game"
 
 [node name="Quit" type="Button" parent="Menu/GameContainer"]
 layout_mode = 2
@@ -281,10 +311,10 @@ placeholder_text = "Game Name..."
 
 [node name="TextureRect" type="TextureRect" parent="AddPopup"]
 layout_mode = 0
-offset_left = 646.0
-offset_top = 124.0
-offset_right = 1006.0
-offset_bottom = 544.0
+offset_left = 649.0
+offset_top = 176.0
+offset_right = 1009.0
+offset_bottom = 573.0
 texture = ExtResource("15_hhw6i")
 expand_mode = 1
 
@@ -299,16 +329,25 @@ access = 2
 layout_mode = 0
 offset_left = 139.0
 offset_top = 324.0
-offset_right = 421.0
+offset_right = 630.0
 offset_bottom = 395.0
 theme_override_font_sizes/font_size = 32
 text = "Change Image"
+
+[node name="Cancel" type="Button" parent="AddPopup"]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 499.0
+offset_right = 630.0
+offset_bottom = 570.0
+theme_override_font_sizes/font_size = 32
+text = "Cancel"
 
 [node name="ChoosePath" type="Button" parent="AddPopup"]
 layout_mode = 0
 offset_left = 139.0
 offset_top = 414.0
-offset_right = 421.0
+offset_right = 630.0
 offset_bottom = 485.0
 theme_override_font_sizes/font_size = 32
 text = "Choose File Path"
@@ -322,9 +361,67 @@ offset_bottom = 570.0
 theme_override_font_sizes/font_size = 32
 text = "Done"
 
+[node name="RemovePopup" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BGcolor" type="ColorRect" parent="RemovePopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 109.0
+offset_top = 64.0
+offset_right = -115.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.470588, 0.639216, 1, 1)
+
+[node name="Label" type="Label" parent="RemovePopup"]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 73.0
+offset_right = 609.0
+offset_bottom = 161.0
+theme_override_font_sizes/font_size = 64
+text = "Remove Game"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RemovePopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 145.0
+offset_top = 174.0
+offset_right = -152.0
+offset_bottom = -97.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RemovePopup/ScrollContainer"]
+layout_mode = 2
+
+[node name="CloseRemove" type="Button" parent="RemovePopup"]
+layout_mode = 0
+offset_left = 839.0
+offset_top = 100.0
+offset_right = 1005.0
+offset_bottom = 151.0
+theme_override_font_sizes/font_size = 32
+text = "Close"
+
 [connection signal="pressed" from="Menu/GameContainer/AddNew" to="." method="_on_add_new_pressed"]
+[connection signal="pressed" from="Menu/GameContainer/RemoveGame" to="." method="_on_remove_game_pressed"]
 [connection signal="pressed" from="Menu/GameContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="file_selected" from="AddPopup/FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="AddPopup/ChangeImage" to="." method="_on_change_image_pressed"]
+[connection signal="pressed" from="AddPopup/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="AddPopup/ChoosePath" to="." method="_on_choose_path_pressed"]
 [connection signal="pressed" from="AddPopup/SubmitGame" to="." method="_on_submit_game_pressed"]
+[connection signal="pressed" from="RemovePopup/CloseRemove" to="." method="_on_close_remove_pressed"]

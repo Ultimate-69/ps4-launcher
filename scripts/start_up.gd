@@ -31,6 +31,7 @@ func _ready() -> void:
 	$Menu.visible = false
 	$HomeScreen.visible = true
 	$AddPopup.visible = false
+	$RemovePopup.visible = false
 	
 	# splash screen
 	
@@ -53,7 +54,8 @@ func _ready() -> void:
 		
 func render_games() -> void:
 	for child_button: Button in $Menu/GameContainer.get_children():
-		if child_button != $Menu/GameContainer/AddNew and child_button != $Menu/GameContainer/Quit:
+		if child_button != $Menu/GameContainer/AddNew and child_button != $Menu/GameContainer/Quit \
+		and child_button != $Menu/GameContainer/RemoveGame:
 			child_button.queue_free()
 			
 	var data = DirAccess.open(DATA_PATH)
@@ -74,6 +76,7 @@ func render_games() -> void:
 				var file_path = IMAGES_PATH + "/" + game + "/image." + ext
 				if FileAccess.file_exists(file_path):
 					game_image = Image.load_from_file(file_path)
+					game_image.resize(128, 128)
 					break
 					
 			var game_image_texture = ImageTexture.create_from_image(game_image)
@@ -86,6 +89,7 @@ func render_games() -> void:
 			game_button.icon = game_image_texture
 			
 			game_button.pressed.connect(func ():
+				AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
 				OS.execute(game_path, [])
 			)
 			$Menu/GameContainer.add_child(game_button)
@@ -106,13 +110,13 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		tween.tween_property($HomeScreen, "modulate", Color(1, 1, 1, 0), 0.3)
 		menu.visible = true
 		menu.position = Vector2(192, 93)
-		menu.scale = Vector2(0.7, 0.7)
+		menu.scale = Vector2(0.5, 0.5)
 		$Menu/GameContainer.position.x = 50
 		await get_tree().create_timer(1).timeout
 		$Menu/GameContainer/AddNew.grab_focus()
 		move_container()
 		tween = create_tween()
-		tween.tween_property(menu, "scale", Vector2(1.0, 1.0), 0.4)
+		tween.tween_property(menu, "scale", Vector2(0.7, 0.7), 0.4)
 		tween = create_tween()
 		tween.tween_property(menu, "position", Vector2(0, 0), 0.4)
 	elif state == States.Menu and focus:
@@ -120,11 +124,16 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			move_container()
 		elif event.is_action("ui_left"):
 			move_container()
+			
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_IN:
+		var audio_server = AudioServer.get_bus_index("Master")
+		AudioServer.set_bus_mute(audio_server, false)
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_left") and focus or Input.is_action_pressed("ui_right") and focus:
 		move_container()
-
+		
 func move_container() -> void:
 	if tween and tween.is_running():
 		tween.kill()
@@ -141,8 +150,8 @@ func play_home_music_with_delay(delay: float) -> void:
 	$Sounds/HomeMusic.play()
 	$Sounds/HomeMusic.volume_db = -80
 	var audio: AudioStreamPlayer = $Sounds/HomeMusic
-	tween = create_tween()
-	tween.tween_property(audio, "volume_db", 0.0, 3)
+	var temp_tween = create_tween()
+	temp_tween.tween_property(audio, "volume_db", 0.0, 3)
 	
 func set_focus(newFocus):
 	if newFocus is Button:
@@ -197,4 +206,34 @@ func _on_submit_game_pressed() -> void:
 		}))
 		file.close()
 		$AddPopup.visible = false
+		$Menu/GameContainer/AddNew.grab_focus()
 		render_games()
+
+
+func _on_remove_game_pressed() -> void:
+	$RemovePopup.visible = true
+	
+	for i in $RemovePopup/ScrollContainer/VBoxContainer.get_children():
+		i.queue_free()
+	
+	var data = DirAccess.open(DATA_PATH)
+	if data:
+		data.list_dir_begin()
+		var game = data.get_next()
+		while game != "":
+			var game_button: Button = Button.new()
+			game_button.text = "Remove " + game
+			game_button.pressed.connect(func ():
+				OS.move_to_trash(ProjectSettings.globalize_path(DATA_PATH + "/" + game))
+				OS.move_to_trash(ProjectSettings.globalize_path(IMAGES_PATH + "/" + game))
+				render_games()
+			)
+			$RemovePopup/ScrollContainer/VBoxContainer.add_child(game_button)
+			game = data.get_next()
+
+func _on_close_remove_pressed() -> void:
+	$RemovePopup.visible = false
+	$Menu/GameContainer/AddNew.grab_focus()
+
+func _on_cancel_pressed() -> void:
+	$AddPopup.visible = false
