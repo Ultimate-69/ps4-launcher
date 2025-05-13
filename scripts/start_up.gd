@@ -19,6 +19,7 @@ enum States {
 
 var tween: Tween
 var current_game_image_path: String
+var current_game_exe_path: String
 
 var is_quitting: bool = false
 var state: States = States.Splash
@@ -49,6 +50,13 @@ func _ready() -> void:
 	if splash:
 		splash.queue_free()
 		play_home_music_with_delay(2.0)
+		
+func render_games() -> void:
+	for child_button: Button in $Menu/GameContainer.get_children():
+		if child_button != $Menu/GameContainer/AddNew and child_button != $Menu/GameContainer/Quit:
+			child_button.queue_free()
+	
+	
 	
 func _unhandled_key_input(event: InputEvent) -> void:
 	if state == States.Boot:
@@ -123,6 +131,10 @@ func _on_change_image_pressed() -> void:
 	$AddPopup/FileDialog.filters = ["*png", "*jpg", "*bmp"]
 	$AddPopup/FileDialog.show()
 
+func _on_choose_path_pressed() -> void:
+	$AddPopup/FileDialog.filters = ["*exe"]
+	$AddPopup/FileDialog.show()
+
 func _on_file_dialog_file_selected(path: String) -> void:
 	if path.ends_with(".png") or path.ends_with(".jpg"):
 		var image: Image = Image.load_from_file(path)
@@ -130,10 +142,8 @@ func _on_file_dialog_file_selected(path: String) -> void:
 		var texture = ImageTexture.create_from_image(image)
 		$AddPopup/TextureRect.texture = texture
 	elif path.ends_with(".exe"):
-		print("app")
-	else:
-		print("invalid")
-
+		current_game_exe_path = path
+	
 func _on_submit_game_pressed() -> void:
 	if $AddPopup/Name.text != "":
 		# make new dir for image and copy old image into new dir
@@ -142,3 +152,14 @@ func _on_submit_game_pressed() -> void:
 		DirAccess.make_dir_recursive_absolute(IMAGES_PATH + "/" + $AddPopup/Name.text)
 		DirAccess.copy_absolute(current_game_image_path, IMAGES_PATH + "/" +
 		 $AddPopup/Name.text + "/" + "image." + current_game_image_path.get_extension())
+		DirAccess.make_dir_recursive_absolute(DATA_PATH + "/" + $AddPopup/Name.text)
+		
+		var file: FileAccess = FileAccess.open(DATA_PATH + "/" + $AddPopup/Name.text + "/" + "data.json", FileAccess.WRITE)
+
+		file.store_string(JSON.stringify({
+			"name": $AddPopup/Name.text,
+			"path": current_game_exe_path
+		}))
+		file.close()
+		$AddPopup.visible = false
+		render_games()

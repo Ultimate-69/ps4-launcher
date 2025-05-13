@@ -326,4 +326,5 @@ text = "Done"
 [connection signal="pressed" from="Menu/GameContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="file_selected" from="AddPopup/FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="AddPopup/ChangeImage" to="." method="_on_change_image_pressed"]
+[connection signal="pressed" from="AddPopup/ChoosePath" to="." method="_on_choose_path_pressed"]
 [connection signal="pressed" from="AddPopup/SubmitGame" to="." method="_on_submit_game_pressed"]
