@@ -80,9 +80,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -526.0
-offset_top = -85.5
-offset_right = 1948.0
-offset_bottom = 85.5
+offset_top = -85.0
+offset_right = 772.0
+offset_bottom = 86.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.70375, 1.70375)
@@ -114,30 +114,6 @@ text = "Placeholder"
 script = ExtResource("10_odctg")
 
 [node name="Button5" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button6" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button7" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button8" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button9" type="Button" parent="Menu/GameContainer"]
 layout_mode = 2
 theme = ExtResource("9_r43fx")
 text = "Placeholder"
@@ -179,13 +155,25 @@ theme = ExtResource("9_r43fx")
 text = "Placeholder"
 script = ExtResource("10_odctg")
 
-[node name="Button16" type="Button" parent="Menu/GameContainer"]
+[node name="Button6" type="Button" parent="Menu/GameContainer"]
 layout_mode = 2
 theme = ExtResource("9_r43fx")
 text = "Placeholder"
 script = ExtResource("10_odctg")
 
-[node name="Button17" type="Button" parent="Menu/GameContainer"]
+[node name="Button7" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button8" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button9" type="Button" parent="Menu/GameContainer"]
 layout_mode = 2
 theme = ExtResource("9_r43fx")
 text = "Placeholder"

@@ -59,21 +59,22 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		menu.visible = true
 		menu.position = Vector2(192, 93)
 		menu.scale = Vector2(0.7, 0.7)
+		$Menu/GameContainer.position.x = 50
+		await get_tree().create_timer(1).timeout
 		$Menu/GameContainer/AddNew.grab_focus()
 		move_container()
-		await get_tree().create_timer(1).timeout
 		tween = create_tween()
 		tween.tween_property(menu, "scale", Vector2(1.0, 1.0), 0.4)
 		tween = create_tween()
 		tween.tween_property(menu, "position", Vector2(0, 0), 0.4)
-	elif state == States.Menu:
+	elif state == States.Menu and focus:
 		if event.is_action("ui_right"):
 			move_container()
 		elif event.is_action("ui_left"):
 			move_container()
 
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_left") and focus or Input.is_action_pressed("ui_right") and focus:
 		move_container()
 
 func move_container() -> void:
