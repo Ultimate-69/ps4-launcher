@@ -1,0 +1,278 @@
+[gd_scene load_steps=13 format=3 uid="uid://cqb5o88gg7xrx"]
+
+[ext_resource type="Texture2D" uid="uid://pr1bu6e7p3db" path="res://assets/images/playstation.png" id="1_fxnlx"]
+[ext_resource type="Script" uid="uid://buvn6q03dt0r6" path="res://scripts/start_up.gd" id="1_wk4wb"]
+[ext_resource type="AudioStream" uid="uid://3kvul2gswu6o" path="res://assets/sfx/boot.mp3" id="2_srdrb"]
+[ext_resource type="AudioStream" uid="uid://dq40nyp7mo74l" path="res://assets/music/PlayStation 4 System Music - OFFICIAL Home Menu (HIGH QUALITY).mp3" id="3_dfxtx"]
+[ext_resource type="AudioStream" uid="uid://ctxku0rt7ixew" path="res://assets/sfx/confirm.mp3" id="3_tgtom"]
+[ext_resource type="VideoStream" uid="uid://c1jjoxgukofvi" path="res://assets/video/youtube_0e-4QrEIsRI_1920x1080_h264.ogv" id="4_qxb3a"]
+[ext_resource type="AudioStream" uid="uid://cjviqbo1tjul7" path="res://assets/sfx/cancel.mp3" id="4_r43fx"]
+[ext_resource type="Texture2D" uid="uid://b2bfamn3kgrfk" path="res://assets/images/ps4-mark.png" id="5_lnxjl"]
+[ext_resource type="AudioStream" uid="uid://6eod54jheth0" path="res://assets/sfx/move.mp3" id="5_odctg"]
+[ext_resource type="AudioStream" uid="uid://djcttskqbxqlj" path="res://assets/sfx/intro.mp3" id="6_l5l0t"]
+[ext_resource type="Theme" uid="uid://cejfgehfbo0tv" path="res://themes/game_open.tres" id="9_r43fx"]
+[ext_resource type="Script" uid="uid://bgipjubahj1jg" path="res://scripts/game_button.gd" id="10_odctg"]
+
+[node name="StartUp" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wk4wb")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Boot" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("2_srdrb")
+volume_db = -20.0
+
+[node name="Confirm" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("3_tgtom")
+
+[node name="Cancel" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_r43fx")
+
+[node name="Move" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_odctg")
+
+[node name="Intro" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_l5l0t")
+
+[node name="HomeMusic" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("3_dfxtx")
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Video" type="VideoStreamPlayer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("4_qxb3a")
+autoplay = true
+expand = true
+loop = true
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameContainer" type="HBoxContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -526.0
+offset_top = -85.5
+offset_right = 1948.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.70375, 1.70375)
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="AddNew" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button2" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button3" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button4" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button5" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button6" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button7" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button8" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button9" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button10" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button11" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button12" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button13" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button14" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button15" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button16" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="Button17" type="Button" parent="Menu/GameContainer"]
+layout_mode = 2
+theme = ExtResource("9_r43fx")
+text = "Placeholder"
+script = ExtResource("10_odctg")
+
+[node name="HomeScreen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PSIcon2" type="TextureRect" parent="HomeScreen"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 48.0
+offset_right = 454.0
+offset_bottom = 132.0
+texture = ExtResource("5_lnxjl")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="HomeScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -223.5
+offset_top = -22.5
+offset_right = 223.5
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Welcome Back to PlayStation"
+
+[node name="Label2" type="Label" parent="HomeScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = 31.0
+offset_right = 198.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Press any Key to continue"
+
+[node name="Splash" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BGColor" type="ColorRect" parent="Splash"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PSIcon" type="TextureRect" parent="Splash"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.5
+offset_top = -72.5
+offset_right = 72.5
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_fxnlx")
+expand_mode = 1

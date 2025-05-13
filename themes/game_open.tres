@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cejfgehfbo0tv"]
+
+[ext_resource type="StyleBox" uid="uid://b4vg5wu8vkpw6" path="res://themes/game_open_button.tres" id="1_rha5c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ym6l1"]
+content_margin_left = 15.0
+content_margin_top = 0.0
+content_margin_right = 15.0
+content_margin_bottom = 0.0
+bg_color = Color(0.190762, 0.190762, 0.190762, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[resource]
+Button/constants/h_separation = 5
+Button/styles/focus = SubResource("StyleBoxFlat_ym6l1")
+Button/styles/normal = ExtResource("1_rha5c")
