@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cqb5o88gg7xrx"]
+[gd_scene load_steps=17 format=3 uid="uid://cqb5o88gg7xrx"]
 
 [ext_resource type="Texture2D" uid="uid://pr1bu6e7p3db" path="res://assets/images/playstation.png" id="1_fxnlx"]
 [ext_resource type="Script" uid="uid://buvn6q03dt0r6" path="res://scripts/start_up.gd" id="1_wk4wb"]
@@ -11,7 +11,13 @@
 [ext_resource type="AudioStream" uid="uid://6eod54jheth0" path="res://assets/sfx/move.mp3" id="5_odctg"]
 [ext_resource type="AudioStream" uid="uid://djcttskqbxqlj" path="res://assets/sfx/intro.mp3" id="6_l5l0t"]
 [ext_resource type="Theme" uid="uid://cejfgehfbo0tv" path="res://themes/game_open.tres" id="9_r43fx"]
+[ext_resource type="Texture2D" uid="uid://bvrqkor4ev85i" path="res://assets/images/ic--baseline-plus.png" id="10_l5l0t"]
 [ext_resource type="Script" uid="uid://bgipjubahj1jg" path="res://scripts/game_button.gd" id="10_odctg"]
+[ext_resource type="Texture2D" uid="uid://7wxbi8ut057t" path="res://assets/images/fluent-mdl2--leave.png" id="12_54e46"]
+[ext_resource type="Texture2D" uid="uid://c15l3omtm4vty" path="res://assets/images/landscape-placeholder.svg" id="15_hhw6i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5l0t"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="StartUp" type="Control"]
 layout_mode = 3
@@ -81,7 +87,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -526.0
 offset_top = -85.0
-offset_right = 772.0
+offset_right = -404.0
 offset_bottom = 86.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -92,92 +98,60 @@ alignment = 1
 [node name="AddNew" type="Button" parent="Menu/GameContainer"]
 layout_mode = 2
 theme = ExtResource("9_r43fx")
-text = "Placeholder"
+theme_override_font_sizes/font_size = 32
+theme_override_icons/icon = ExtResource("10_l5l0t")
 script = ExtResource("10_odctg")
 
-[node name="Button2" type="Button" parent="Menu/GameContainer"]
+[node name="Panel" type="Panel" parent="Menu/GameContainer/AddNew"]
+layout_mode = 0
+offset_top = 170.0
+offset_right = 158.0
+offset_bottom = 195.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l5l0t")
+
+[node name="Label" type="Label" parent="Menu/GameContainer/AddNew/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -11.5
+offset_right = 60.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Add New Game"
+
+[node name="Quit" type="Button" parent="Menu/GameContainer"]
 layout_mode = 2
 theme = ExtResource("9_r43fx")
-text = "Placeholder"
+theme_override_font_sizes/font_size = 32
+theme_override_icons/icon = ExtResource("12_54e46")
 script = ExtResource("10_odctg")
 
-[node name="Button3" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
+[node name="Panel" type="Panel" parent="Menu/GameContainer/Quit"]
+layout_mode = 0
+offset_top = 170.0
+offset_right = 158.0
+offset_bottom = 195.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l5l0t")
 
-[node name="Button4" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button5" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button10" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button11" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button12" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button13" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button14" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button15" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button6" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button7" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button8" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
-
-[node name="Button9" type="Button" parent="Menu/GameContainer"]
-layout_mode = 2
-theme = ExtResource("9_r43fx")
-text = "Placeholder"
-script = ExtResource("10_odctg")
+[node name="Label" type="Label" parent="Menu/GameContainer/Quit/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.5
+offset_top = -11.5
+offset_right = 55.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit Launcher"
 
 [node name="HomeScreen" type="Control" parent="."]
 visible = false
@@ -264,3 +238,84 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_fxnlx")
 expand_mode = 1
+
+[node name="AddPopup" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BGcolor" type="ColorRect" parent="AddPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 109.0
+offset_top = 64.0
+offset_right = -115.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.470588, 0.639216, 1, 1)
+
+[node name="Label" type="Label" parent="AddPopup"]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 73.0
+offset_right = 609.0
+offset_bottom = 161.0
+theme_override_font_sizes/font_size = 64
+text = "Add New Game"
+
+[node name="Name" type="TextEdit" parent="AddPopup"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 176.0
+offset_right = 630.0
+offset_bottom = 304.0
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Game Name..."
+
+[node name="TextureRect" type="TextureRect" parent="AddPopup"]
+layout_mode = 0
+offset_left = 646.0
+offset_top = 124.0
+offset_right = 1006.0
+offset_bottom = 544.0
+texture = ExtResource("15_hhw6i")
+expand_mode = 1
+
+[node name="FileDialog" type="FileDialog" parent="AddPopup"]
+
+[node name="ChangeImage" type="Button" parent="AddPopup"]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 324.0
+offset_right = 421.0
+offset_bottom = 395.0
+theme_override_font_sizes/font_size = 32
+text = "Change Image"
+
+[node name="ChoosePath" type="Button" parent="AddPopup"]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 414.0
+offset_right = 421.0
+offset_bottom = 485.0
+theme_override_font_sizes/font_size = 32
+text = "Choose File Path"
+
+[node name="SubmitGame" type="Button" parent="AddPopup"]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 499.0
+offset_right = 421.0
+offset_bottom = 570.0
+theme_override_font_sizes/font_size = 32
+text = "Done"
+
+[connection signal="pressed" from="Menu/GameContainer/AddNew" to="." method="_on_add_new_pressed"]
+[connection signal="pressed" from="Menu/GameContainer/Quit" to="." method="_on_quit_pressed"]

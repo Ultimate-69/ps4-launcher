@@ -14,9 +14,9 @@ enum States {
 	Menu
 }
 
-var spacing := 25  # space between items
 var tween: Tween
 
+var is_quitting: bool = false
 var state: States = States.Splash
 var focus: Button
 
@@ -25,12 +25,13 @@ func _ready() -> void:
 	$Splash.visible = true
 	$Menu.visible = false
 	$HomeScreen.visible = true
+	$AddPopup.visible = false
 	
 	# splash screen
 	
 	ps_icon.modulate = Color(1, 1, 1, 0)
 	await get_tree().create_timer(1.0).timeout
-	var tween = create_tween()
+	tween = create_tween()
 	tween.tween_property(ps_icon, "modulate", Color(1, 1, 1, 1), 0.3)
 	await get_tree().create_timer(3.0).timeout
 	tween = create_tween()
@@ -54,7 +55,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			$Sounds/Boot.volume_db = -80
 			play_home_music_with_delay(0)
 		
-		var tween = create_tween()
+		tween = create_tween()
 		tween.tween_property($HomeScreen, "modulate", Color(1, 1, 1, 0), 0.3)
 		menu.visible = true
 		menu.position = Vector2(192, 93)
@@ -86,16 +87,29 @@ func move_container() -> void:
 	tween = create_tween()
 	tween.tween_property(game_container, "position:x", target_x, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	if not move_sound.playing:
-		if focus != game_items[0] and focus != game_items[-1]:
-			move_sound.play()
+		move_sound.play()
 	
 func play_home_music_with_delay(delay: float) -> void:
 	await get_tree().create_timer(delay).timeout
 	$Sounds/HomeMusic.play()
 	$Sounds/HomeMusic.volume_db = -80
 	var audio: AudioStreamPlayer = $Sounds/HomeMusic
-	var tween = create_tween()
+	tween = create_tween()
 	tween.tween_property(audio, "volume_db", 0.0, 3)
 	
 func set_focus(newFocus):
 	focus = newFocus
+
+func _on_add_new_pressed() -> void:
+	$AddPopup.visible = true
+	$AddPopup/SubmitGame.grab_focus()
+
+func _on_quit_pressed() -> void:
+	if is_quitting: return
+	is_quitting = true
+
+	$Sounds/Confirm.play()
+	await get_tree().create_timer(1.0).timeout
+	var quit: Button = $Menu/GameContainer/Quit
+	
+	get_tree().quit()
