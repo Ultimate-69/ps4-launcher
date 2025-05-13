@@ -55,12 +55,47 @@ func render_games() -> void:
 	for child_button: Button in $Menu/GameContainer.get_children():
 		if child_button != $Menu/GameContainer/AddNew and child_button != $Menu/GameContainer/Quit:
 			child_button.queue_free()
-	
-	
+			
+	var data = DirAccess.open(DATA_PATH)
+	if data:
+		data.list_dir_begin()
+		var game = data.get_next()
+		while game != "":
+			var game_data = FileAccess.get_file_as_string(DATA_PATH + "/" + game + "/data.json")
+			game_data = JSON.parse_string(game_data)
+			
+			var game_name: String = game_data["name"]
+			var game_path: String = game_data["path"]
+		
+			var game_image: Image
+			
+			var extensions = ["png", "jpg", "bmp"]
+			for ext in extensions:
+				var file_path = IMAGES_PATH + "/" + game + "/image." + ext
+				if FileAccess.file_exists(file_path):
+					game_image = Image.load_from_file(file_path)
+					break
+					
+			var game_image_texture = ImageTexture.create_from_image(game_image)
+			
+			var game_button: Button = $Menu/GameContainer/AddNew.duplicate()
+			game_button.pressed.disconnect(_on_add_new_pressed)
+			var panel = game_button.get_children()[0]
+			var label = panel.get_children()[0]
+			label.text = game_name
+			game_button.icon = game_image_texture
+			
+			game_button.pressed.connect(func ():
+				OS.execute(game_path, [])
+			)
+			$Menu/GameContainer.add_child(game_button)
+			
+			game = data.get_next()
 	
 func _unhandled_key_input(event: InputEvent) -> void:
 	if state == States.Boot:
 		state = States.Menu
+		render_games()
 		$Sounds/Intro.play()
 		if $Sounds/Boot.playing:
 			$Splash.queue_free()

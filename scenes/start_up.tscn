@@ -289,7 +289,7 @@ texture = ExtResource("15_hhw6i")
 expand_mode = 1
 
 [node name="FileDialog" type="FileDialog" parent="AddPopup"]
-title = "Load Image"
+title = "Open a File"
 ok_button_text = "Open"
 dialog_hide_on_ok = true
 file_mode = 0
