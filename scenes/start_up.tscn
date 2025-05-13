@@ -289,6 +289,11 @@ texture = ExtResource("15_hhw6i")
 expand_mode = 1
 
 [node name="FileDialog" type="FileDialog" parent="AddPopup"]
+title = "Load Image"
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+file_mode = 0
+access = 2
 
 [node name="ChangeImage" type="Button" parent="AddPopup"]
 layout_mode = 0
@@ -319,3 +324,6 @@ text = "Done"
 
 [connection signal="pressed" from="Menu/GameContainer/AddNew" to="." method="_on_add_new_pressed"]
 [connection signal="pressed" from="Menu/GameContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="file_selected" from="AddPopup/FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="pressed" from="AddPopup/ChangeImage" to="." method="_on_change_image_pressed"]
+[connection signal="pressed" from="AddPopup/SubmitGame" to="." method="_on_submit_game_pressed"]

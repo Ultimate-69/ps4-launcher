@@ -8,6 +8,9 @@ extends Control
 @onready var move_sound: AudioStreamPlayer = $Sounds/Move
 @onready var game_items: Array[Node] = game_container.get_children()
 
+const IMAGES_PATH = "user://game_images"
+const DATA_PATH = "user://game_data"
+
 enum States {
 	Splash,
 	Boot,
@@ -15,6 +18,7 @@ enum States {
 }
 
 var tween: Tween
+var current_game_image_path: String
 
 var is_quitting: bool = false
 var state: States = States.Splash
@@ -98,7 +102,8 @@ func play_home_music_with_delay(delay: float) -> void:
 	tween.tween_property(audio, "volume_db", 0.0, 3)
 	
 func set_focus(newFocus):
-	focus = newFocus
+	if newFocus is Button:
+		focus = newFocus
 
 func _on_add_new_pressed() -> void:
 	$AddPopup.visible = true
@@ -113,3 +118,27 @@ func _on_quit_pressed() -> void:
 	var quit: Button = $Menu/GameContainer/Quit
 	
 	get_tree().quit()
+
+func _on_change_image_pressed() -> void:
+	$AddPopup/FileDialog.filters = ["*png", "*jpg", "*bmp"]
+	$AddPopup/FileDialog.show()
+
+func _on_file_dialog_file_selected(path: String) -> void:
+	if path.ends_with(".png") or path.ends_with(".jpg"):
+		var image: Image = Image.load_from_file(path)
+		current_game_image_path = path
+		var texture = ImageTexture.create_from_image(image)
+		$AddPopup/TextureRect.texture = texture
+	elif path.ends_with(".exe"):
+		print("app")
+	else:
+		print("invalid")
+
+func _on_submit_game_pressed() -> void:
+	if $AddPopup/Name.text != "":
+		# make new dir for image and copy old image into new dir
+		# this helps if the old image gets deleted or something 
+		# because now the game points to this image
+		DirAccess.make_dir_recursive_absolute(IMAGES_PATH + "/" + $AddPopup/Name.text)
+		DirAccess.copy_absolute(current_game_image_path, IMAGES_PATH + "/" +
+		 $AddPopup/Name.text + "/" + "image." + current_game_image_path.get_extension())
