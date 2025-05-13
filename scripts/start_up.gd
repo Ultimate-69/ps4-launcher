@@ -237,3 +237,4 @@ func _on_close_remove_pressed() -> void:
 
 func _on_cancel_pressed() -> void:
 	$AddPopup.visible = false
+	$Menu/GameContainer/AddNew.grab_focus()
